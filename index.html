@@ -41,7 +41,6 @@
     <div class="container">
       <h1 class="display-4">Computer Science ePortfolio</h1>
       <p class="lead">CS 499 Computer Science Capstone | Southern New Hampshire University</p>
-      <a href="https://github.com/Bechdel-t/Bechdel-t.github.io" class="btn btn-outline-light btn-sm mt-2" target="_blank">View GitHub Repository</a>
     </div>
   </header>
 
@@ -107,18 +106,37 @@
             <li><strong>Security & Authentication:</strong> Configured JWT (JSON Web Token) interceptors and bearer token authorization headers to protect database write routes against unauthorized access.</li>
           </ul>
 
-          <h5 class="mt-4">Featured Code Preview: JWT Express Middleware</h5>
-          <pre class="bg-dark text-light p-3 rounded"><code>const jwt = require('express-jwt');
+          <div class="my-3">
+            <a href="#code-se-original" class="btn btn-outline-secondary me-2">View Original Code</a>
+            <a href="#code-se-enhanced" class="btn btn-success">View Enhanced Code</a>
+          </div>
+
+          <div id="code-se-original" class="mt-4">
+            <h5>Original Code Preview: Baseline Handlebars Route Rendering</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>// Legacy monolithic rendering route
+var express = require('express');
+var router = express.Router();
+var travelController = require('../controllers/travel');
+
+/* GET travel page. */
+router.get('/', travelController.travelList);
+
+module.exports = router;</code></pre>
+          </div>
+
+          <div id="code-se-enhanced" class="mt-4">
+            <h5>Enhanced Code Preview: JWT Express Middleware & Decoupled API</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>const jwt = require('express-jwt');
 const auth = jwt({
   secret: process.env.JWT_SECRET,
   userProperty: 'payload',
   algorithms: ['HS256']
 });
-module.exports = auth;</code></pre>
 
-          <div class="mt-4">
-            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" class="btn btn-outline-secondary me-2" target="_blank">View Original Artifact</a>
-            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/software-engineering" class="btn btn-success" target="_blank">View Enhanced Code</a>
+// Protected write route
+router.post('/trips', auth, tripsController.tripsAddTrip);
+
+module.exports = auth;</code></pre>
           </div>
         </div>
       </div>
@@ -141,8 +159,25 @@ module.exports = auth;</code></pre>
             <li><strong>DOM Sanitization:</strong> Integrated <code>[innerHTML]</code> bindings to parse and render HTML-formatted description fields safely without degrading layout performance.</li>
           </ul>
 
-          <h5 class="mt-4">Featured Code Preview: Server-Side Price Filter</h5>
-          <pre class="bg-dark text-light p-3 rounded"><code>const tripsFindByPrice = async (req, res) => {
+          <div class="my-3">
+            <a href="#code-alg-original" class="btn btn-outline-secondary me-2">View Original Code</a>
+            <a href="#code-alg-enhanced" class="btn btn-info text-white">View Enhanced Code</a>
+          </div>
+
+          <div id="code-alg-original" class="mt-4">
+            <h5>Original Code Preview: Unfiltered In-Memory Array Lookup</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>// Legacy unindexed JSON array fetch
+const fs = require('fs');
+const tripsData = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
+
+const getTrips = (req, res) => {
+  res.status(200).json(tripsData);
+};</code></pre>
+          </div>
+
+          <div id="code-alg-enhanced" class="mt-4">
+            <h5>Enhanced Code Preview: Server-Side Price Filtering Algorithm</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>const tripsFindByPrice = async (req, res) => {
   const { min, max } = req.query;
   try {
     const trips = await Model.find({
@@ -153,10 +188,6 @@ module.exports = auth;</code></pre>
     return res.status(500).json(err);
   }
 };</code></pre>
-
-          <div class="mt-4">
-            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" class="btn btn-outline-secondary me-2" target="_blank">View Original Artifact</a>
-            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/algorithms" class="btn btn-info text-white" target="_blank">View Enhanced Code</a>
           </div>
         </div>
       </div>
@@ -179,8 +210,31 @@ module.exports = auth;</code></pre>
             <li><strong>Connection Resilience:</strong> Established persistent connection handling in <code>db.js</code> with Mongoose event logging to maintain stable database sessions.</li>
           </ul>
 
-          <h5 class="mt-4">Featured Code Preview: Mongoose Schema Definition</h5>
-          <pre class="bg-dark text-light p-3 rounded"><code>const mongoose = require('mongoose');
+          <div class="my-3">
+            <a href="#code-db-original" class="btn btn-outline-secondary me-2">View Original Code</a>
+            <a href="#code-db-enhanced" class="btn btn-warning">View Enhanced Code</a>
+          </div>
+
+          <div id="code-db-original" class="mt-4">
+            <h5>Original Code Preview: Static JSON Data File</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>[
+  {
+    "code": "GALR210214",
+    "name": "Gale Reef",
+    "length": "4 nights / 5 days",
+    "start": "2021-02-14T00:00:00.000Z",
+    "resort": "Emerald Bay, 3 stars",
+    "perPerson": "799.00",
+    "image": "reef1.jpg",
+    "description": "Gale Reef feature description..."
+  }
+]</code></pre>
+          </div>
+
+          <div id="code-db-enhanced" class="mt-4">
+            <h5>Enhanced Code Preview: Strict Mongoose Schema & Indexing</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>const mongoose = require('mongoose');
+
 const tripSchema = new mongoose.Schema({
   code: { type: String, required: true, index: true, unique: true },
   name: { type: String, required: true, index: true },
@@ -191,11 +245,8 @@ const tripSchema = new mongoose.Schema({
   image: { type: String, required: true },
   description: { type: String, required: true }
 });
-module.exports = mongoose.model('trips', tripSchema);</code></pre>
 
-          <div class="mt-4">
-            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" class="btn btn-outline-secondary me-2" target="_blank">View Original Artifact</a>
-            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/databases" class="btn btn-warning" target="_blank">View Enhanced Code</a>
+module.exports = mongoose.model('trips', tripSchema);</code></pre>
           </div>
         </div>
       </div>
