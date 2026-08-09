@@ -96,23 +96,46 @@
         </div>
         <div class="card-body">
           <h4>Artifact Narrative: Travlr Getaways Full-Stack Refactoring</h4>
-          <p>To demonstrate advanced proficiency in software design and engineering, I refactored the legacy Travlr Getaways application into a modernized, decoupled <strong>MEAN stack architecture</strong>.</p>
+          <p>To demonstrate advanced proficiency in software design and engineering, I refactored the legacy Travlr Getaways application into a modernized, decoupled <strong>MEAN stack architecture</strong>. The original codebase combined client-side logic with backend template rendering, limiting scalability and maintainability.</p>
           
+          <h5>Key Enhancements Implemented:</h5>
+          <ul>
+            <li><strong>Decoupled Architecture:</strong> Separated the administrative frontend into a standalone Angular single-page application (SPA), isolating the Node.js/Express backend purely as a RESTful API provider.</li>
+            <li><strong>Modular Angular Design:</strong> Built standalone Angular components utilizing dependency injection, RxJS observables, and TypeScript interfaces.</li>
+            <li><strong>Security & Authentication:</strong> Configured JWT (JSON Web Token) interceptors and bearer token authorization headers to protect database write routes against unauthorized access.</li>
+          </ul>
+
           <div class="my-3">
             <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" target="_blank" class="btn btn-outline-secondary me-2">View Original Code</a>
             <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/software-engineering" target="_blank" class="btn btn-success">View Enhanced Code</a>
           </div>
 
-          <div class="mt-4">
-            <h5>Original Code Preview</h5>
+          <div id="code-se-original" class="mt-4">
+            <h5>Original Code Preview: Baseline Handlebars Route Rendering</h5>
             <pre class="bg-dark text-light p-3 rounded"><code>// Legacy monolithic rendering route
 var express = require('express');
 var router = express.Router();
 var travelController = require('../controllers/travel');
 
+/* GET travel page. */
 router.get('/', travelController.travelList);
 
 module.exports = router;</code></pre>
+          </div>
+
+          <div id="code-se-enhanced" class="mt-4">
+            <h5>Enhanced Code Preview: JWT Express Middleware & Decoupled API</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>const jwt = require('express-jwt');
+const auth = jwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: 'payload',
+  algorithms: ['HS256']
+});
+
+// Protected write route
+router.post('/trips', auth, tripsController.tripsAddTrip);
+
+module.exports = auth;</code></pre>
           </div>
         </div>
       </div>
@@ -126,15 +149,33 @@ module.exports = router;</code></pre>
         </div>
         <div class="card-body">
           <h4>Artifact Narrative: Server-Side Query Filtering & Data Mapping</h4>
-          <p>The initial application retrieved flat, unstructured trip datasets. I optimized the data processing pipeline across both server and client layers.</p>
+          <p>The initial application retrieved flat, unstructured trip datasets directly from disk with no dynamic filtering capabilities. For this enhancement, I optimized the data processing pipeline across both server and client layers.</p>
           
+          <h5>Key Enhancements Implemented:</h5>
+          <ul>
+            <li><strong>Server-Side Range Searching:</strong> Engineered a custom price-range search endpoint (<code>GET /api/trips/search/price</code>) using query parameters to process filtering at the backend layer before transferring payloads.</li>
+            <li><strong>Data Structure Validation:</strong> Implemented defensive array handling (<code>Array.isArray()</code>) within client-side subscriptions to prevent runtime execution errors during data binding.</li>
+            <li><strong>DOM Sanitization:</strong> Integrated <code>[innerHTML]</code> bindings to parse and render HTML-formatted description fields safely without degrading layout performance.</li>
+          </ul>
+
           <div class="my-3">
             <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" target="_blank" class="btn btn-outline-secondary me-2">View Original Code</a>
             <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/algorithms" target="_blank" class="btn btn-info text-white">View Enhanced Code</a>
           </div>
 
-          <div class="mt-4">
-            <h5>Enhanced Code Preview</h5>
+          <div id="code-alg-original" class="mt-4">
+            <h5>Original Code Preview: Unfiltered In-Memory Array Lookup</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>// Legacy unindexed JSON array fetch
+const fs = require('fs');
+const tripsData = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
+
+const getTrips = (req, res) => {
+  res.status(200).json(tripsData);
+};</code></pre>
+          </div>
+
+          <div id="code-alg-enhanced" class="mt-4">
+            <h5>Enhanced Code Preview: Server-Side Price Filtering Algorithm</h5>
             <pre class="bg-dark text-light p-3 rounded"><code>const tripsFindByPrice = async (req, res) => {
   const { min, max } = req.query;
   try {
@@ -159,19 +200,48 @@ module.exports = router;</code></pre>
         </div>
         <div class="card-body">
           <h4>Artifact Narrative: MongoDB & Mongoose Schema Integration</h4>
-          <p>I expanded the backend persistence layer into a fully integrated, production-ready <strong>MongoDB</strong> database managed via <strong>Mongoose ORM</strong>.</p>
+          <p>The original data layer relied on static mock arrays and unindexed JSON storage. I expanded the backend persistence layer into a fully integrated, production-ready <strong>MongoDB</strong> database managed via <strong>Mongoose ORM</strong> schemas.</p>
           
+          <h5>Key Enhancements Implemented:</h5>
+          <ul>
+            <li><strong>Schema Design:</strong> Created strict Mongoose schemas defining explicit data types, required validation rules, and primary key indices (such as unique <code>tripCode</code>).</li>
+            <li><strong>RESTful CRUD Operations:</strong> Mapped HTTP request methods directly to Mongoose query primitives (<code>find()</code>, <code>create()</code>, <code>findOneAndUpdate()</code>, <code>findOneAndDelete()</code>).</li>
+            <li><strong>Connection Resilience:</strong> Established persistent connection handling in <code>db.js</code> with Mongoose event logging to maintain stable database sessions.</li>
+          </ul>
+
           <div class="my-3">
             <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" target="_blank" class="btn btn-outline-secondary me-2">View Original Code</a>
             <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/databases" target="_blank" class="btn btn-warning">View Enhanced Code</a>
           </div>
 
-          <div class="mt-4">
-            <h5>Enhanced Code Preview</h5>
-            <pre class="bg-dark text-light p-3 rounded"><code>const tripSchema = new mongoose.Schema({
+          <div id="code-db-original" class="mt-4">
+            <h5>Original Code Preview: Static JSON Data File</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>[
+  {
+    "code": "GALR210214",
+    "name": "Gale Reef",
+    "length": "4 nights / 5 days",
+    "start": "2021-02-14T00:00:00.000Z",
+    "resort": "Emerald Bay, 3 stars",
+    "perPerson": "799.00",
+    "image": "reef1.jpg",
+    "description": "Gale Reef feature description..."
+  }
+]</code></pre>
+          </div>
+
+          <div id="code-db-enhanced" class="mt-4">
+            <h5>Enhanced Code Preview: Strict Mongoose Schema & Indexing</h5>
+            <pre class="bg-dark text-light p-3 rounded"><code>const mongoose = require('mongoose');
+
+const tripSchema = new mongoose.Schema({
   code: { type: String, required: true, index: true, unique: true },
   name: { type: String, required: true, index: true },
+  length: { type: String, required: true },
+  start: { type: Date, required: true },
+  resort: { type: String, required: true },
   perPerson: { type: Number, required: true },
+  image: { type: String, required: true },
   description: { type: String, required: true }
 });
 
