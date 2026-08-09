@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracy Bechdel | CS Capstone ePortfolio</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding-top: 56px; background-color: #f8f9fa; }
+    .hero { background-color: #212529; color: white; padding: 60px 0; }
+    .card { margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Tracy Bechdel | ePortfolio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#self-assessment">Self-Assessment</a></li>
+          <li class="nav-item"><a class="nav-link" href="#code-review">Code Review</a></li>
+          <li class="nav-item"><a class="nav-link" href="#software-engineering">Software Engineering</a></li>
+          <li class="nav-item"><a class="nav-link" href="#algorithms">Algorithms</a></li>
+          <li class="nav-item"><a class="nav-link" href="#databases">Databases</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="hero text-center mb-5">
+    <div class="container">
+      <h1 class="display-4">Computer Science ePortfolio</h1>
+      <p class="lead">CS 499 Computer Science Capstone | Southern New Hampshire University</p>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Section 1: Professional Self-Assessment -->
+    <section id="self-assessment" class="mb-5">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h2>Professional Self-Assessment</h2>
+        </div>
+        <div class="card-body">
+          <h4>Executive Summary & Career Vision</h4>
+          <p>Welcome to my professional computer science ePortfolio. As a software developer graduating from Southern New Hampshire University, my technical focus centers on full-stack web engineering, secure backend development, and efficient data processing architectures. Throughout my academic progression, I have cultivated a disciplined approach to software design, prioritizing modular architecture, algorithmic optimization, and secure data handling.</p>
+          <p>This portfolio showcases the iterative enhancement of my capstone artifact—the <strong>Travlr Getaways</strong> web application—demonstrating my growth across software engineering and design, data structures and algorithms, and database management. Additionally, my work reflects an adaptability to emerging industry trends, particularly the integration of Generative AI for automated development workflows and the principles of Edge Computing for low-latency, privacy-focused application design.</p>
+          
+          <h4 class="mt-4">Core Competencies</h4>
+          <ul>
+            <li><strong>Languages & Frameworks:</strong> JavaScript (ES6+), TypeScript, Node.js, Express.js, Angular (Standalone Architecture), HTML5, CSS3, Bootstrap.</li>
+            <li><strong>Database Management:</strong> MongoDB, Mongoose ODM, JSON schemas, Indexing, RESTful API design.</li>
+            <li><strong>Software Engineering:</strong> Separation of Concerns (MVC), JWT Bearer Authentication, Dependency Injection, Standalone Components.</li>
+            <li><strong>Algorithms & Optimization:</strong> Custom search/sorting routines, Server-side price filtering, Change detection handling.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Code Review Video -->
+    <section id="code-review" class="mb-5">
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h2>Informal Code Review Video</h2>
+        </div>
+        <div class="card-body">
+          <p>Below is the code review walkthrough analyzing the legacy codebase prior to enhancements, highlighting structural weaknesses, and outlining the planned refactoring strategy across all three outcome categories.</p>
+          
+          <!-- Replace YOUR_VIDEO_ID with your YouTube/Loom video ID or link -->
+          <div class="video-container mb-3">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Code Review Video" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Software Engineering & Design -->
+    <section id="software-engineering" class="mb-5">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h2>Category 1: Software Design & Engineering</h2>
+        </div>
+        <div class="card-body">
+          <h4>Artifact Narrative: Travlr Getaways Full-Stack Refactoring</h4>
+          <p>To demonstrate advanced proficiency in software design and engineering, I refactored the legacy Travlr Getaways application into a modernized, decoupled <strong>MEAN stack architecture</strong>. The original codebase combined client-side logic with backend template rendering, limiting scalability and maintainability.</p>
+          
+          <h5>Key Enhancements Implemented:</h5>
+          <ul>
+            <li><strong>Decoupled Architecture:</strong> Separated the administrative frontend into a standalone Angular single-page application (SPA), isolating the Node.js/Express backend purely as a RESTful API provider.</li>
+            <li><strong>Modular Angular Design:</strong> Built standalone Angular components utilizing dependency injection, RxJS observables, and TypeScript interfaces.</li>
+            <li><strong>Security & Authentication:</strong> Configured JWT (JSON Web Token) interceptors and bearer token authorization headers to protect database write routes against unauthorized access.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Algorithms & Data Structures -->
+    <section id="algorithms" class="mb-5">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          <h2>Category 2: Algorithms & Data Structures</h2>
+        </div>
+        <div class="card-body">
+          <h4>Artifact Narrative: Server-Side Query Filtering & Data Mapping</h4>
+          <p>The initial application retrieved flat, unstructured trip datasets directly from disk with no dynamic filtering capabilities. For this enhancement, I optimized the data processing pipeline across both server and client layers.</p>
+          
+          <h5>Key Enhancements Implemented:</h5>
+          <ul>
+            <li><strong>Server-Side Range Searching:</strong> Engineered a custom price-range search endpoint (<code>GET /api/trips/search/price</code>) using query parameters to process filtering at the backend layer before transferring payloads.</li>
+            <li><strong>Data Structure Validation:</strong> Implemented defensive array handling (<code>Array.isArray()</code>) within client-side subscriptions to prevent runtime execution errors during data binding.</li>
+            <li><strong>DOM Sanitization:</strong> Integrated <code>[innerHTML]</code> bindings to parse and render HTML-formatted description fields safely without degrading layout performance.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Databases -->
+    <section id="databases" class="mb-5">
+      <div class="card">
+        <div class="card-header bg-warning text-dark">
+          <h2>Category 3: Databases</h2>
+        </div>
+        <div class="card-body">
+          <h4>Artifact Narrative: MongoDB & Mongoose Schema Integration</h4>
+          <p>The original data layer relied on static mock arrays and unindexed JSON storage. I expanded the backend persistence layer into a fully integrated, production-ready <strong>MongoDB</strong> database managed via <strong>Mongoose ORM</strong> schemas.</p>
+          
+          <h5>Key Enhancements Implemented:</h5>
+          <ul>
+            <li><strong>Schema Design:</strong> Created strict Mongoose schemas defining explicit data types, required validation rules, and primary key indices (such as unique <code>tripCode</code>).</li>
+            <li><strong>RESTful CRUD Operations:</strong> Mapped HTTP request methods directly to Mongoose query primitives (<code>find()</code>, <code>create()</code>, <code>findOneAndUpdate()</code>, <code>findOneAndDelete()</code>).</li>
+            <li><strong>Connection Resilience:</strong> Established persistent connection handling in <code>db.js</code> with Mongoose event logging to maintain stable database sessions.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="text-center py-4 bg-dark text-white mt-5">
+    <p>&copy; 2026 Tracy Bechdel | SNHU CS 499 Computer Science Capstone</p>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
