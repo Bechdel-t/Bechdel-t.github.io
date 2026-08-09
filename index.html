@@ -12,6 +12,7 @@
     .card { margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    pre { font-size: 0.875rem; max-height: 250px; overflow-y: auto; }
   </style>
 </head>
 <body>
@@ -40,6 +41,7 @@
     <div class="container">
       <h1 class="display-4">Computer Science ePortfolio</h1>
       <p class="lead">CS 499 Computer Science Capstone | Southern New Hampshire University</p>
+      <a href="https://github.com/Bechdel-t/Bechdel-t.github.io" class="btn btn-outline-light btn-sm mt-2" target="_blank">View GitHub Repository</a>
     </div>
   </header>
 
@@ -63,6 +65,10 @@
             <li><strong>Software Engineering:</strong> Separation of Concerns (MVC), JWT Bearer Authentication, Dependency Injection, Standalone Components.</li>
             <li><strong>Algorithms & Optimization:</strong> Custom search/sorting routines, Server-side price filtering, Change detection handling.</li>
           </ul>
+
+          <h4 class="mt-4">Professional Reflection Across Disciplines</h4>
+          <p><strong>Collaborating in a Team Environment & Communicating with Stakeholders:</strong> Successful software development relies heavily on effective collaboration and transparent communication. Throughout my program, I engaged in agile software engineering practices, conducting code reviews, documenting software architectures, and creating clear technical design specifications tailored for both technical lead and non-technical stakeholder review.</p>
+          <p><strong>Security Mindset:</strong> Security must be integrated into every stage of the software lifecycle. Through refactoring projects like Travlr Getaways and mobile UI design projects like NutriScan, I applied input validation routines, defensive exception handling, JWT bearer tokens, and route authorization guards to defend against data corruption and unauthorized API access.</p>
         </div>
       </div>
     </section>
@@ -76,8 +82,8 @@
         <div class="card-body">
           <p>Below is the code review walkthrough analyzing the legacy codebase prior to enhancements, highlighting structural weaknesses, and outlining the planned refactoring strategy across all three outcome categories.</p>
           
-          <!-- Replace YOUR_VIDEO_ID with your YouTube/Loom video ID or link -->
           <div class="video-container mb-3">
+            <!-- Replace YOUR_VIDEO_ID with your YouTube or Loom video ID -->
             <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Code Review Video" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
@@ -100,6 +106,20 @@
             <li><strong>Modular Angular Design:</strong> Built standalone Angular components utilizing dependency injection, RxJS observables, and TypeScript interfaces.</li>
             <li><strong>Security & Authentication:</strong> Configured JWT (JSON Web Token) interceptors and bearer token authorization headers to protect database write routes against unauthorized access.</li>
           </ul>
+
+          <h5 class="mt-4">Featured Code Preview: JWT Express Middleware</h5>
+          <pre class="bg-dark text-light p-3 rounded"><code>const jwt = require('express-jwt');
+const auth = jwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: 'payload',
+  algorithms: ['HS256']
+});
+module.exports = auth;</code></pre>
+
+          <div class="mt-4">
+            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" class="btn btn-outline-secondary me-2" target="_blank">View Original Artifact</a>
+            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/software-engineering" class="btn btn-success" target="_blank">View Enhanced Code</a>
+          </div>
         </div>
       </div>
     </section>
@@ -120,6 +140,24 @@
             <li><strong>Data Structure Validation:</strong> Implemented defensive array handling (<code>Array.isArray()</code>) within client-side subscriptions to prevent runtime execution errors during data binding.</li>
             <li><strong>DOM Sanitization:</strong> Integrated <code>[innerHTML]</code> bindings to parse and render HTML-formatted description fields safely without degrading layout performance.</li>
           </ul>
+
+          <h5 class="mt-4">Featured Code Preview: Server-Side Price Filter</h5>
+          <pre class="bg-dark text-light p-3 rounded"><code>const tripsFindByPrice = async (req, res) => {
+  const { min, max } = req.query;
+  try {
+    const trips = await Model.find({
+      perPerson: { $gte: Number(min), $lte: Number(max) }
+    }).exec();
+    return res.status(200).json(trips);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};</code></pre>
+
+          <div class="mt-4">
+            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" class="btn btn-outline-secondary me-2" target="_blank">View Original Artifact</a>
+            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/algorithms" class="btn btn-info text-white" target="_blank">View Enhanced Code</a>
+          </div>
         </div>
       </div>
     </section>
@@ -140,6 +178,25 @@
             <li><strong>RESTful CRUD Operations:</strong> Mapped HTTP request methods directly to Mongoose query primitives (<code>find()</code>, <code>create()</code>, <code>findOneAndUpdate()</code>, <code>findOneAndDelete()</code>).</li>
             <li><strong>Connection Resilience:</strong> Established persistent connection handling in <code>db.js</code> with Mongoose event logging to maintain stable database sessions.</li>
           </ul>
+
+          <h5 class="mt-4">Featured Code Preview: Mongoose Schema Definition</h5>
+          <pre class="bg-dark text-light p-3 rounded"><code>const mongoose = require('mongoose');
+const tripSchema = new mongoose.Schema({
+  code: { type: String, required: true, index: true, unique: true },
+  name: { type: String, required: true, index: true },
+  length: { type: String, required: true },
+  start: { type: Date, required: true },
+  resort: { type: String, required: true },
+  perPerson: { type: Number, required: true },
+  image: { type: String, required: true },
+  description: { type: String, required: true }
+});
+module.exports = mongoose.model('trips', tripSchema);</code></pre>
+
+          <div class="mt-4">
+            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/original" class="btn btn-outline-secondary me-2" target="_blank">View Original Artifact</a>
+            <a href="https://github.com/Bechdel-t/Bechdel-t.github.io/tree/main/artifacts/databases" class="btn btn-warning" target="_blank">View Enhanced Code</a>
+          </div>
         </div>
       </div>
     </section>
